@@ -1,0 +1,3 @@
+select top 4 (select cc.CurrentName from CurrentCards as cc where cc.CurrentCode = am.CurrentCode) as 'CurrrentName',ccd.FirstInformation,ccd.GsmNo,ccd.Email,ccd.SecondPhone,ccd.Province,ccd.District,Sum(ISNULL(am.Credit,0)) AS 'Credit' from AccountMovements as am inner join CurrentCards as c on c.CurrentCode=am.CurrentCode inner join CurrentCardDetails as ccd on am.CurrentCode=ccd.CurrentCode where MONTH(am.MovementDate) = MONTH(DATEADD(MONTH, +1, GETDATE())) group by am.CurrentCode,ccd.SecondPhone,ccd.FirstInformation,ccd.GsmNo,ccd.Email,ccd.Province,ccd.District ORDER BY Credit DESC
+
+/* bu ay en çok gideri olan cari kartlar 2 adet isimleri ne kadar gider yaptýklarýn ve iletiþim bilgileri */
